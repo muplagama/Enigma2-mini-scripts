@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 
 _camgrep=$(pgrep oscam)
 _cams_start=$(wc -l <(echo "$_camgrep") | awk '{print $1}')
