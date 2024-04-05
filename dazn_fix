@@ -2,7 +2,9 @@
 cat << 'EOF' > /usr/bin/enigma2_pre_start.sh
 
 #!/bin/bash
+if [ -e /proc/stb/video/avshutdown ]; then
 echo "down" > /proc/stb/video/avshutdown && echo "up" > /proc/stb/video/avshutdown
+fi
 EOF
 
 chmod 755 /usr/bin/enigma2_pre_start.sh
