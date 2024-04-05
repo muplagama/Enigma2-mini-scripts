@@ -1,0 +1,12 @@
+#!/bin/bash
+cat << 'EOF' > /usr/bin/enigma2_pre_start.sh
+
+#!/bin/bash
+echo "down" > /proc/stb/video/avshutdown && echo "up" > /proc/stb/video/avshutdown
+EOF
+
+chmod 755 /usr/bin/enigma2_pre_start.sh
+
+reboot
+
+### thx to DarkStarXxX ###
