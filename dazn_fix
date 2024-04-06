@@ -1,14 +1,14 @@
 #!/bin/bash
-cat << 'EOF' > /usr/bin/enigma2_pre_start.sh
-
-#!/bin/bash
 if [ -e /proc/stb/video/avshutdown ]; then
+echo "avshutdown found"
+
+cat << 'EOF' > /usr/bin/enigma2_pre_start.sh
+#!/bin/bash
 echo "down" > /proc/stb/video/avshutdown && echo "up" > /proc/stb/video/avshutdown
-fi
 EOF
-
 chmod 755 /usr/bin/enigma2_pre_start.sh
-
+echo "workaround applied successfully, rebooting"
 reboot
-
-### thx to DarkStarXxX ###
+else
+echo "sorry, cant use workaround on this system"
+fi
