@@ -12,3 +12,4 @@ reboot
 else
 echo "sorry, cant use workaround on this system"
 fi
+### thx to DarkStarXxX ###
