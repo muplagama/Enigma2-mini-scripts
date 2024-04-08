@@ -1,0 +1,17 @@
+#!/bin/bash
+
+cat << 'EOF' > /usr/bin/fcctest
+#!/bin/bash
+
+_checkfcc=$(grep config.plugins.fccsetup.activate /etc/enigma2/settings | sed  's/.*=//')
+                if [[ $_checkfcc == "True" ]]; then
+                init 4
+                sleep 5
+                sed -i '/config.plugins.fccsetup.activate=True/d' /etc/enigma2/settings
+                echo 'config.plugins.fccsetup.activate=False' >> /etc/enigma2/settings
+                init 3
+                fi
+EOF
+
+chmod +x /usr/bin/fcctest
+(crontab -l 2>/dev/null; echo "@reboot /usr/bin/fcctest ") | crontab -
