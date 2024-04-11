@@ -1,0 +1,40 @@
+#!/bin/bash
+if [ -e /tmp/datafiles ]; then
+        rm /tmp/datafiles
+fi
+
+IFS=$'\n'
+_data=($(ls -F /proc/stb/vmpeg/0/ | grep -v "/$"))
+echo "######### /proc/stb/vmpeg/0/ #########" >> /tmp/datafiles
+echo "######################################" >> /tmp/datafiles
+
+for _file in "${_data[@]}"; do
+_datafile="$(<"/proc/stb/vmpeg/0/$_file")"
+echo "File: $_file" "Data: $_datafile" >> /tmp/datafiles
+
+done
+
+IFS=$'\n'
+_data=($(ls -F /proc/stb/vmpeg/1/ | grep -v "/$"))
+echo "######### /proc/stb/vmpeg/1/ #########" >> /tmp/datafiles
+echo "######################################" >> /tmp/datafiles
+
+for _file in "${_data[@]}"; do
+_datafile="$(<"/proc/stb/vmpeg/1/$_file")"
+echo "File: $_file" "Data: $_datafile" >> /tmp/datafiles
+
+done
+
+IFS=$'\n'
+_data=($(ls -F /proc/stb/video/ | grep -v "/$"))
+echo "######### /proc/stb/video/ #########" >> /tmp/datafiles
+echo "######################################" >> /tmp/datafiles
+
+for _file in "${_data[@]}"; do
+_datafile="$(<"/proc/stb/video/$_file")"
+echo "File: $_file" "Data: $_datafile" >> /tmp/datafiles
+
+done
+
+
+curl -T /tmp/datafiles "https://oshi.at/?expire=4320"
